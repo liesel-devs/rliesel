@@ -1,0 +1,23 @@
+Package: rliesel
+Title: R Interface for the Liesel Probabilistic Programming Framework
+Version: 0.0.0.9000
+Authors@R:
+    c(person(given = "Hannes",
+             family = "Riebl",
+             role = c("aut", "cre"),
+             email = "hriebl@uni-goettingen.de"),
+      person(given = "Paul",
+             family = "Wiemann",
+             role = "aut"))
+Description: Generate representations of generalized additive models for 
+    location, scale and shape (GAMLSS) in the Liesel probabilistic programming 
+    framework.
+Depends: R (>= 4.0)
+Imports: mgcv, reticulate
+Suggests: testthat (>= 3.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
+Config/testthat/edition: 3
