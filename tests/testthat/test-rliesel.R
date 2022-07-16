@@ -39,7 +39,7 @@ test_that("get_p_smooth() works", {
   expect_equal(py_to_r(p_smooth$s), 100, ignore_attr = "dim")
 })
 
-np_smooths <- get_np_smooths(gam, "loc")
+np_smooths <- get_np_smooths(gam, "loc", TRUE)
 np_smooth <- np_smooths[[1]]
 
 test_that("get_np_smooths() works", {

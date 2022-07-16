@@ -12,8 +12,9 @@ add_copula(
     dependence = predictor(~1, inverse_link = "AlgebraicSigmoid")
   ),
   data = NULL,
-  builder = FALSE,
-  knots = NULL
+  knots = NULL,
+  diagonalize_penalties = TRUE,
+  builder = FALSE
 )
 }
 \arguments{
@@ -32,10 +33,12 @@ TensorFlow distribution.}
 By default, the data is extracted from the environment of
 the formulas.}
 
-\item{builder}{Whether to return the model builder or the model.}
-
 \item{knots}{A list containing the knots per term.
 Passed on to \code{\link[mgcv:gam]{mgcv::gam()}}.}
+
+\item{diagonalize_penalties}{Whether to diagonalize the smooth penalties.}
+
+\item{builder}{Whether to return the model builder or the model.}
 }
 \description{
 Build a copula regression model from two marginal distributional regression

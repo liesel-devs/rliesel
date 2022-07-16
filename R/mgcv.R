@@ -9,6 +9,7 @@ set_up_gam <- function(response, formula, data, knots) {
   gam(formula, data = data, knots = knots, fit = FALSE)
 }
 
+
 get_p_smooth <- function(gam, predictor, name) {
   X <- gam$X[, seq(1, gam$nsdf), drop = FALSE]
 
@@ -21,7 +22,10 @@ get_p_smooth <- function(gam, predictor, name) {
   )
 }
 
-get_np_smooths <- function(gam, predictor) {
+
+#' @importFrom mgcv smooth2random
+
+get_np_smooths <- function(gam, predictor, diagonalize_penalties) {
   lapply(gam$smooth, function(smooth) {
     X <- gam$X[, seq(smooth$first.par, smooth$last.par), drop = FALSE]
 
@@ -37,7 +41,14 @@ get_np_smooths <- function(gam, predictor) {
       )
     }
 
-    K <- smooth$S[[1]]
+    if (diagonalize_penalties) {
+      smooth$X <- X
+      random <- smooth2random(smooth, vnames = "", type = 2)
+      X <- cbind(random$rand$Xr, random$Xf)
+      K <- diag(random$pen.ind)
+    } else {
+      K <- smooth$S[[1]]
+    }
 
     list(
       X = np_array(X),

@@ -1,4 +1,5 @@
-fill_mb <- function(mb, response, predictors, data, knots) {
+fill_mb <- function(mb, response, predictors, data, knots,
+                    diagonalize_penalties) {
   for (name in names(predictors)) {
     formula <- predictors[[name]]$formula
     gam <- set_up_gam(response, formula, data, knots)
@@ -7,7 +8,7 @@ fill_mb <- function(mb, response, predictors, data, knots) {
     p_smooth <- get_p_smooth(gam, name, p_smooth_name)
     do.call(mb$add_p_smooth, p_smooth)
 
-    np_smooths <- get_np_smooths(gam, name)
+    np_smooths <- get_np_smooths(gam, name, diagonalize_penalties)
 
     for (np_smooth in np_smooths) {
       not_fixed <- "K" %in% names(np_smooth)
@@ -57,8 +58,9 @@ predictor <- function(formula = ~1, inverse_link = "Identity",
 #'     scale = predictor(~1, inverse_link = "Exp")
 #'   ),
 #'   data = NULL,
-#'   builder = FALSE,
-#'   knots = NULL
+#'   knots = NULL,
+#'   diagonalize_penalties = TRUE,
+#'   builder = FALSE
 #' )
 #'
 #' @param response The response vector (or matrix).
@@ -71,9 +73,10 @@ predictor <- function(formula = ~1, inverse_link = "Identity",
 #' @param data A data frame or list containing the data for the model.
 #'             By default, the data is extracted from the environment of
 #'             the formulas.
-#' @param builder Whether to return the model builder or the model.
 #' @param knots A list containing the knots per term.
 #'              Passed on to [`mgcv::gam()`].
+#' @param diagonalize_penalties Whether to diagonalize the smooth penalties.
+#' @param builder Whether to return the model builder or the model.
 #'
 #' @export
 
@@ -84,11 +87,12 @@ liesel <- function(response,
                      scale = predictor(~1, inverse_link = "Exp")
                    ),
                    data = NULL,
-                   builder = FALSE,
-                   knots = NULL) {
+                   knots = NULL,
+                   diagonalize_penalties = TRUE,
+                   builder = FALSE) {
   mb <- .lsl$DistRegBuilder()
 
-  fill_mb(mb, response, predictors, data, knots)
+  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
   mb$add_response(response, distribution)
 
   if (builder) mb else mb$build()
@@ -110,8 +114,9 @@ liesel <- function(response,
 #'     dependence = predictor(~1, inverse_link = "AlgebraicSigmoid")
 #'   ),
 #'   data = NULL,
-#'   builder = FALSE,
-#'   knots = NULL
+#'   knots = NULL,
+#'   diagonalize_penalties = TRUE,
+#'   builder = FALSE
 #' )
 #'
 #' @param model0 The first marginal distributional regression model.
@@ -132,12 +137,13 @@ add_copula <- function(model0,
                          )
                        ),
                        data = NULL,
-                       builder = FALSE,
-                       knots = NULL) {
+                       knots = NULL,
+                       diagonalize_penalties = TRUE,
+                       builder = FALSE) {
   mb <- .lsl$CopRegBuilder(model0, model1)
 
   response <- py_to_r(model0$response$value)
-  fill_mb(mb, response, predictors, data, knots)
+  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
   mb$add_copula(copula)
 
   if (builder) mb else mb$build()
