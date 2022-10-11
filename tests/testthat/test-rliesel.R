@@ -1,5 +1,6 @@
 library(mgcv)
 library(reticulate)
+set.seed(1337)
 
 n <- 10
 x <- runif(n)
