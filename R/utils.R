@@ -36,12 +36,14 @@ load_model <- function(path) {
 #' Plot the graph of a Liesel model
 #'
 #' @param x The model to plot.
+#' @param nodes Whether to plot the computational nodes instead of the
+#'              statistical variables. Defaults to `FALSE`.
 #' @param ... Passed on to the `plot_model()` function
 #'            in the `liesel.liesel.viz` module.
 #'
 #' @export
 
-plot.liesel.liesel.model.Model <- function(x, ...) {
-  .lsl$plot_model(x, ...)
+plot.liesel.liesel.model.Model <- function(x, nodes = FALSE, ...) {
+  if (!nodes) .lslv$plot_vars(x, ...) else .lslv$plot_nodes(x, ...)
   invisible(NULL)
 }

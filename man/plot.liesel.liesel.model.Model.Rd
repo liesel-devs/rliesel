@@ -4,10 +4,13 @@
 \alias{plot.liesel.liesel.model.Model}
 \title{Plot the graph of a Liesel model}
 \usage{
-\method{plot}{liesel.liesel.model.Model}(x, ...)
+\method{plot}{liesel.liesel.model.Model}(x, nodes = FALSE, ...)
 }
 \arguments{
 \item{x}{The model to plot.}
+
+\item{nodes}{Whether to plot the computational nodes instead of the
+statistical variables. Defaults to \code{FALSE}.}
 
 \item{...}{Passed on to the \code{plot_model()} function
 in the \code{liesel.liesel.viz} module.}

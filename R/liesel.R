@@ -37,7 +37,7 @@ fill_mb <- function(mb, response, predictors, data, knots,
 
 predictor <- function(formula = ~1, inverse_link = "Identity",
                       p_smooth_name = NULL) {
-  list(formula = formula, inverse_link = inverse_link,
+  list(formula = formula, inverse_link = get_bijector(inverse_link),
        p_smooth_name = p_smooth_name)
 }
 
@@ -93,7 +93,7 @@ liesel <- function(response,
   mb <- .lsl$DistRegBuilder()
 
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-  mb$add_response(response, distribution)
+  mb$add_response(response, get_distribution(distribution))
 
   if (builder) mb else mb$build()
 }
@@ -144,7 +144,7 @@ add_copula <- function(model0,
 
   response <- py_to_r(model0$response$value)
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-  mb$add_copula(copula)
+  mb$add_copula(get_distribution(copula))
 
   if (builder) mb else mb$build()
 }
