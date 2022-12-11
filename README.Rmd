@@ -74,8 +74,8 @@ plot(linear_mod)
 ```
 
 ```{python linear-mod, echo = FALSE}
-import liesel.liesel.viz as lslv
-lslv.plot_vars(r.linear_mod)
+import liesel.model as lsl
+lsl.plot_vars(r.linear_mod)
 ```
 
 The attributes of the Python model object such as the nodes or the log-probability can be accessed in R with the `$` operator, e.g. `linear_mod$nodes$loc_p1_beta$value` or `linear_mod$log_prob`.
@@ -100,7 +100,7 @@ plot(spline_mod)
 ```
 
 ```{python spline-mod, echo = FALSE}
-lslv.plot_vars(r.spline_mod)
+lsl.plot_vars(r.spline_mod)
 ```
 
 Users who are familiar with the `mgcv` package may recognize the syntax from the `gam()` function, which can be used to set up an equivalent model as follows:

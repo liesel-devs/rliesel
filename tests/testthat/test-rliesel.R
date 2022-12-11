@@ -98,17 +98,18 @@ mb <- liesel(y, "Normal", list(loc = pdt_loc, scale = pdt_scale), data,
              builder = TRUE)
 
 test_that("liesel() works", {
-  expect_s3_class(mb, "liesel.liesel.model.ModelBuilder")
-  expect_s3_class(m, "liesel.liesel.model.Model")
+  expect_s3_class(mb, "liesel.model.distreg.DistRegBuilder")
+  expect_s3_class(m, "liesel.model.model.Model")
 
-  expect_equal(py_to_r(m$nodes$response$value), y)
+  vars <- py_eval("dict(r.m.vars)")
+  expect_equal(vars$response$value, y)
 
   expect_s3_class(
-    m$nodes$response$distribution$distribution(),
-    "tensorflow_probability.substrates.numpy.distributions.normal.Normal"
+    vars$response$dist_node$init_dist(),
+    "tensorflow_probability.substrates.jax.distributions.normal.Normal"
   )
 
-  expected_node_names <- c(
+  expected_var_names <- c(
     "loc",
     "loc_p0",
     "loc_p0_X",
@@ -134,83 +135,5 @@ test_that("liesel() works", {
     "scale_pdt"
   )
 
-  expect_setequal(names(m$nodes), expected_node_names)
-})
-
-mb0 <- liesel(y, "Normal", list(loc = pdt_loc, scale = pdt_scale), data,
-             builder = TRUE)
-
-mb1 <- liesel(y, "Normal", list(loc = pdt_loc, scale = pdt_scale), data,
-             builder = TRUE)
-
-m <- add_copula(mb0, mb1)
-
-test_that("add_copula() works", {
-  expect_s3_class(m, "liesel.liesel.model.Model")
-
-  expect_s3_class(
-    m$nodes$copula$distribution$distribution(),
-    "liesel.tfp.numpy.distributions.copulas.GaussianCopula"
-  )
-
-  expected_node_names <- c(
-    "copula",
-    "dependence",
-    "dependence_p0",
-    "dependence_p0_X",
-    "dependence_p0_beta",
-    "dependence_p0_m",
-    "dependence_p0_s",
-    "dependence_pdt",
-    "m0_loc",
-    "m0_loc_p0",
-    "m0_loc_p0_X",
-    "m0_loc_p0_beta",
-    "m0_loc_p0_m",
-    "m0_loc_p0_s",
-    "m0_loc_pdt",
-    "m0_my_smooth",
-    "m0_my_smooth_X",
-    "m0_my_smooth_beta",
-    "m0_my_smooth_m",
-    "m0_my_smooth_s",
-    "m0_pit",
-    "m0_response",
-    "m0_scale",
-    "m0_scale_np0",
-    "m0_scale_np0_K",
-    "m0_scale_np0_X",
-    "m0_scale_np0_a",
-    "m0_scale_np0_b",
-    "m0_scale_np0_beta",
-    "m0_scale_np0_rank",
-    "m0_scale_np0_tau2",
-    "m0_scale_pdt",
-    "m1_loc",
-    "m1_loc_p0",
-    "m1_loc_p0_X",
-    "m1_loc_p0_beta",
-    "m1_loc_p0_m",
-    "m1_loc_p0_s",
-    "m1_loc_pdt",
-    "m1_my_smooth",
-    "m1_my_smooth_X",
-    "m1_my_smooth_beta",
-    "m1_my_smooth_m",
-    "m1_my_smooth_s",
-    "m1_pit",
-    "m1_response",
-    "m1_scale",
-    "m1_scale_np0",
-    "m1_scale_np0_K",
-    "m1_scale_np0_X",
-    "m1_scale_np0_a",
-    "m1_scale_np0_b",
-    "m1_scale_np0_beta",
-    "m1_scale_np0_rank",
-    "m1_scale_np0_tau2",
-    "m1_scale_pdt"
-  )
-
-  expect_setequal(names(m$nodes), expected_node_names)
+  expect_setequal(names(vars), expected_var_names)
 })

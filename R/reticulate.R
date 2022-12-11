@@ -2,10 +2,8 @@ LIESEL_REPO <- "github.com/liesel-devs/liesel.git"
 LIESEL_REV <- "main"
 
 .lsl <- NULL
-.lslv <- NULL
 .lsld <- NULL
 .lslb <- NULL
-
 .tfd <- NULL
 .tfb <- NULL
 
@@ -13,8 +11,7 @@ LIESEL_REV <- "main"
 #' @importFrom reticulate import
 
 .onLoad <- function(libname, pkgname) {
-  .lsl <<- import("liesel.liesel", convert = FALSE, delay_load = TRUE)
-  .lslv <<- import("liesel.liesel.viz", convert = FALSE, delay_load = TRUE)
+  .lsl <<- import("liesel.model", convert = FALSE, delay_load = TRUE)
   .lsld <<- import("liesel.distributions", convert = FALSE, delay_load = TRUE)
   .lslb <<- import("liesel.bijectors", convert = FALSE, delay_load = TRUE)
 
@@ -32,25 +29,6 @@ LIESEL_REV <- "main"
                         "e.g. with use_liesel_venv()")
 
   invisible(NULL)
-}
-
-
-#' @importFrom reticulate py_get_attr py_has_attr
-
-get_distribution <- function(distribution) {
-  if (py_has_attr(.lsld, distribution)) {
-    py_get_attr(.lsld, distribution)
-  } else {
-    py_get_attr(.tfd, distribution)
-  }
-}
-
-get_bijector <- function(bijector) {
-  if (py_has_attr(.lslb, bijector)) {
-    py_get_attr(.lslb, bijector)
-  } else {
-    py_get_attr(.tfb, bijector)
-  }
 }
 
 

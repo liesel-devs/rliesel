@@ -38,12 +38,26 @@ load_model <- function(path) {
 #' @param x The model to plot.
 #' @param nodes Whether to plot the computational nodes instead of the
 #'              statistical variables. Defaults to `FALSE`.
-#' @param ... Passed on to the `plot_model()` function
-#'            in the `liesel.liesel.viz` module.
+#' @param ... Passed on to the `plot_vars()` or `plot_nodes()` function
+#'            in the `liesel.model.viz` module.
 #'
 #' @export
 
-plot.liesel.liesel.model.Model <- function(x, nodes = FALSE, ...) {
-  if (!nodes) .lslv$plot_vars(x, ...) else .lslv$plot_nodes(x, ...)
+plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
+  if (!nodes) .lsl$plot_vars(x, ...) else .lsl$plot_nodes(x, ...)
   invisible(NULL)
+}
+
+
+#' @importFrom reticulate py_has_attr
+
+get_distribution <- function(x) {
+  if (py_has_attr(.lsld, x)) .lsld[[x]] else .tfd[[x]]
+}
+
+
+#' @importFrom reticulate py_has_attr
+
+get_bijector <- function(x) {
+  if (py_has_attr(.lslb, x)) .lslb[[x]] else .tfb[[x]]
 }
