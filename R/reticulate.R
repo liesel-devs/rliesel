@@ -2,12 +2,25 @@ LIESEL_REPO <- "github.com/liesel-devs/liesel.git"
 LIESEL_REV <- "main"
 
 .lsl <- NULL
+.lsld <- NULL
+.lslb <- NULL
+.tfd <- NULL
+.tfb <- NULL
 
 
 #' @importFrom reticulate import
 
 .onLoad <- function(libname, pkgname) {
-  .lsl <<- import("liesel.liesel", convert = FALSE, delay_load = TRUE)
+  .lsl <<- import("liesel.model", convert = FALSE, delay_load = TRUE)
+  .lsld <<- import("liesel.distributions", convert = FALSE, delay_load = TRUE)
+  .lslb <<- import("liesel.bijectors", convert = FALSE, delay_load = TRUE)
+
+  .tfd <<- import("tensorflow_probability.substrates.jax.distributions",
+                  convert = FALSE, delay_load = TRUE)
+
+  .tfb <<- import("tensorflow_probability.substrates.jax.bijectors",
+                  convert = FALSE, delay_load = TRUE)
+
   invisible(NULL)
 }
 

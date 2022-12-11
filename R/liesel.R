@@ -17,7 +17,7 @@ fill_mb <- function(mb, response, predictors, data, knots,
     }
 
     inverse_link <- predictors[[name]]$inverse_link
-    mb$add_predictor(name, inverse_link)
+    mb$add_predictor(name, get_bijector(inverse_link))
   }
 }
 
@@ -93,58 +93,7 @@ liesel <- function(response,
   mb <- .lsl$DistRegBuilder()
 
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-  mb$add_response(response, distribution)
+  mb$add_response(response, get_distribution(distribution))
 
-  if (builder) mb else mb$build()
-}
-
-
-#' Add a copula to a pair of marginal distributional regression models
-#'
-#' Build a copula regression model from two marginal distributional regression
-#' models from the [`liesel()`] function.
-#'
-#' @usage
-#'
-#' add_copula(
-#'   model0,
-#'   model1,
-#'   copula = "GaussianCopula",
-#'   predictors = list(
-#'     dependence = predictor(~1, inverse_link = "AlgebraicSigmoid")
-#'   ),
-#'   data = NULL,
-#'   knots = NULL,
-#'   diagonalize_penalties = TRUE,
-#'   builder = FALSE
-#' )
-#'
-#' @param model0 The first marginal distributional regression model.
-#' @param model1 The second marginal distributional regression model.
-#' @param copula A string identifying a copula in Liesel's TensorFlow
-#'               Probability module.
-#' @inheritParams liesel
-#'
-#' @importFrom reticulate py_to_r
-#' @export
-
-add_copula <- function(model0,
-                       model1,
-                       copula = "GaussianCopula",
-                       predictors = list(
-                         dependence = predictor(
-                           ~1, inverse_link = "AlgebraicSigmoid"
-                         )
-                       ),
-                       data = NULL,
-                       knots = NULL,
-                       diagonalize_penalties = TRUE,
-                       builder = FALSE) {
-  mb <- .lsl$CopRegBuilder(model0, model1)
-
-  response <- py_to_r(model0$response$value)
-  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-  mb$add_copula(copula)
-
-  if (builder) mb else mb$build()
+  if (builder) mb else mb$build_model()
 }
