@@ -1,6 +1,9 @@
 fill_mb <- function(mb, response, predictors, data, knots,
                     diagonalize_penalties) {
   for (name in names(predictors)) {
+    inverse_link <- predictors[[name]]$inverse_link
+    mb$add_predictor(name, get_bijector(inverse_link))
+
     formula <- predictors[[name]]$formula
     gam <- set_up_gam(response, formula, data, knots)
 
@@ -16,8 +19,6 @@ fill_mb <- function(mb, response, predictors, data, knots,
       do.call(fn, np_smooth)
     }
 
-    inverse_link <- predictors[[name]]$inverse_link
-    mb$add_predictor(name, get_bijector(inverse_link))
   }
 }
 
@@ -92,8 +93,8 @@ liesel <- function(response,
                    builder = FALSE) {
   mb <- .lsl$DistRegBuilder()
 
-  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
   mb$add_response(response, get_distribution(distribution))
+  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
 
   if (builder) mb else mb$build_model()
 }
