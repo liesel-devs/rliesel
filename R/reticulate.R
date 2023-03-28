@@ -1,5 +1,5 @@
 LIESEL_REPO <- "github.com/liesel-devs/liesel.git"
-LIESEL_REV <- "main"
+LIESEL_REV <- "refactor-distregbuilder"
 
 .lsl <- NULL
 .lsld <- NULL
