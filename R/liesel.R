@@ -18,7 +18,6 @@ fill_mb <- function(mb, response, predictors, data, knots,
       fn <- if (not_fixed) mb$add_np_smooth else mb$add_p_smooth
       do.call(fn, np_smooth)
     }
-
   }
 }
 
@@ -92,9 +91,7 @@ liesel <- function(response,
                    diagonalize_penalties = TRUE,
                    builder = FALSE) {
   mb <- .lsl$DistRegBuilder()
-
   mb$add_response(response, get_distribution(distribution))
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-
   if (builder) mb else mb$build_model()
 }
