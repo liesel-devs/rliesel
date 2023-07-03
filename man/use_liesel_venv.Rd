@@ -15,8 +15,7 @@ use_liesel_venv(virtualenv = NULL, python = NULL, version = NULL)
 Python as installed by the \code{\link[reticulate:install_python]{install_python()}} helper function.}
 }
 \description{
-Use a Liesel virtual environment with \code{reticulate}. If the argument
-\code{virtualenv} is not set, fall back to the environment variable \code{LIESELENV}.
-If \code{LIESELENV} is not set either, fall back to a temporary Liesel virtual
-environment.
+This function is defunct. Please configure the Liesel virtual or
+conda environment manually, e.g. using \code{\link[reticulate:use_python]{reticulate::use_virtualenv()}} or
+\code{\link[reticulate:use_python]{reticulate::use_condaenv()}}. See \code{vignette("versions", "reticulate")}.
 }

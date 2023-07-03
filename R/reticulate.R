@@ -25,8 +25,11 @@ LIESEL_REV <- "main"
 }
 
 .onAttach <- function(libname, pkgname) {
-  packageStartupMessage("Please set your Liesel venv, ",
-                        "e.g. with use_liesel_venv()")
+  packageStartupMessage(
+    'Please make sure you are using a virtual or conda environment with Liesel installed, ',
+    'e.g. using `reticulate::use_virtualenv()` or `reticulate::use_condaenv()`. ',
+    'See `vignette("versions", "reticulate")`.'
+  )
 
   invisible(NULL)
 }
@@ -34,31 +37,29 @@ LIESEL_REV <- "main"
 
 #' Use a Liesel virtual environment
 #'
-#' Use a Liesel virtual environment with `reticulate`. If the argument
-#' `virtualenv` is not set, fall back to the environment variable `LIESELENV`.
-#' If `LIESELENV` is not set either, fall back to a temporary Liesel virtual
-#' environment.
+#' This function is defunct. Please configure the Liesel virtual or
+#' conda environment manually, e.g. using [reticulate::use_virtualenv()] or
+#' [reticulate::use_condaenv()]. See `vignette("versions", "reticulate")`.
 #'
 #' @inheritParams reticulate::use_virtualenv
 #' @inheritParams reticulate::virtualenv_create
-#'
-#' @importFrom reticulate use_virtualenv
 #' @export
 
 use_liesel_venv <- function(virtualenv = NULL, python = NULL, version = NULL) {
-  if (is.null(virtualenv)) {
-    virtualenv <- Sys.getenv("LIESELENV")
-  }
-
-  if (virtualenv == "") {
-    message("Creating a temporary Liesel venv. Set $LIESELENV to avoid this")
-    virtualenv <- use_tmp_liesel_venv(python, version)
-  }
-
-  use_virtualenv(virtualenv, required = TRUE)
-
-  virtualenv
+  .Defunct("reticulate::use_virtualenv", "rliesel")
 }
+
+
+#' Defunct Functions in Package **rliesel**
+#'
+#' The functions or variables listed here are no longer part of **rliesel** as
+#' they are no longer needed.
+#'
+#' @usage
+#' use_liesel_venv()
+#' @name rliesel-defunct
+
+NULL
 
 
 #' Create and use a temporary Liesel virtual environment

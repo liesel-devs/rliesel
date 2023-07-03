@@ -30,8 +30,6 @@ devtools::install_github("liesel-devs/rliesel")
 
 ``` r
 library(rliesel)
-use_liesel_venv()
-#> [1] "liesel"
 ```
 
 The `liesel()` function is the workhorse of RLiesel and can be used to
