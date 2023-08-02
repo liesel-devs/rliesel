@@ -19,3 +19,4 @@ virtual environment. Python installations as installed via
 Create a temporary Python virtual environment, install Liesel in it,
 and use it with \code{reticulate}.
 }
+\keyword{internal}

@@ -1,5 +1,4 @@
-LIESEL_REPO <- "github.com/liesel-devs/liesel.git"
-LIESEL_REV <- "main"
+LIESEL_VERSION <- "0.2.3.9000"
 
 .lsl <- NULL
 .lsld <- NULL
@@ -28,7 +27,9 @@ LIESEL_REV <- "main"
   packageStartupMessage(
     'Please make sure you are using a virtual or conda environment with Liesel installed, ',
     'e.g. using `reticulate::use_virtualenv()` or `reticulate::use_condaenv()`. ',
-    'See `vignette("versions", "reticulate")`.'
+    'See `vignette("versions", "reticulate")`.\n\n',
+    'After setting the environment, check if the installed versions of RLiesel and Liesel ',
+    'are compatible with `check_liesel_version()`.'
   )
 
   invisible(NULL)
@@ -70,7 +71,7 @@ NULL
 #' @inheritParams reticulate::virtualenv_create
 #'
 #' @importFrom reticulate use_virtualenv virtualenv_create virtualenv_install
-#' @export
+#' @keywords internal
 
 use_tmp_liesel_venv <- function(python = NULL, version = NULL) {
   virtualenv <- tempdir()
@@ -78,11 +79,36 @@ use_tmp_liesel_venv <- function(python = NULL, version = NULL) {
   virtualenv_create(virtualenv, python = python, version = version,
                     system_site_packages = FALSE)
 
-  package <- paste0("git+https://", LIESEL_REPO, "@", LIESEL_REV)
+  package <- paste0("git+https://github.com/liesel-devs/liesel.git")
 
   virtualenv_install(virtualenv, package, ignore_installed = TRUE)
   try(virtualenv_install(virtualenv, "pygraphviz", ignore_installed = TRUE))
   use_virtualenv(virtualenv, required = TRUE)
 
   virtualenv
+}
+
+
+#' Check if the installed versions of RLiesel and Liesel are compatible
+#'
+#' Note that this function needs to be called after setting the virtual or
+#' conda environment, e.g. using [reticulate::use_virtualenv()] or
+#' [reticulate::use_condaenv()].
+#'
+#' @importFrom reticulate import py_to_r
+#' @importFrom utils compareVersion
+#' @export
+
+check_liesel_version <- function() {
+  module <- import("liesel", convert = FALSE)
+  version <- py_to_r(module["__version__"])
+
+  if (compareVersion(version, LIESEL_VERSION) < 0) {
+    stop("Installed Liesel version ", version, " is incompatible, ",
+         "need at least version ", LIESEL_VERSION)
+  } else {
+    message("Installed Liesel version ", version, " is compatible.")
+  }
+
+  invisible(NULL)
 }

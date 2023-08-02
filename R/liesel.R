@@ -90,6 +90,7 @@ liesel <- function(response,
                    knots = NULL,
                    diagonalize_penalties = TRUE,
                    builder = FALSE) {
+  check_liesel_version()
   mb <- .lsl$DistRegBuilder()
   mb$add_response(response, get_distribution(distribution))
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
