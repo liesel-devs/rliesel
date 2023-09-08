@@ -10,10 +10,6 @@ use_tmp_liesel_venv(python = NULL, version = NULL)
 \item{python}{The path to a Python interpreter, to be used with the created
 virtual environment. When \code{NULL}, the Python interpreter associated with
 the current session will be used.}
-
-\item{version}{The version of Python to be used with the newly-created
-virtual environment. Python installations as installed via
-\code{\link[reticulate:install_python]{install_python()}} will be used.}
 }
 \description{
 Create a temporary Python virtual environment, install Liesel in it,
