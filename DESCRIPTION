@@ -13,7 +13,7 @@ Description: Generate representations of generalized additive models for
     location, scale and shape (GAMLSS) in the Liesel probabilistic programming 
     framework.
 Depends: R (>= 4.0)
-Imports: mgcv, reticulate
+Imports: mgcv, reticulate (>= 1.31)
 Suggests: testthat (>= 3.0)
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -68,24 +68,21 @@ NULL
 #' Create a temporary Python virtual environment, install Liesel in it,
 #' and use it with `reticulate`.
 #'
-#' @inheritParams reticulate::virtualenv_create
+#' @param ... Passed on to [reticulate::virtualenv_create()].
 #'
 #' @importFrom reticulate use_virtualenv virtualenv_create virtualenv_install
 #' @keywords internal
 
-use_tmp_liesel_venv <- function(python = NULL, version = NULL) {
-  virtualenv <- tempdir()
+use_tmp_liesel_venv <- function(...) {
+  path <- tempdir()
 
-  virtualenv_create(virtualenv, python = python, version = version,
-                    system_site_packages = FALSE)
+  virtualenv_create(path, ...)
+  virtualenv_install(path, "git+https://github.com/liesel-devs/liesel.git",
+                     ignore_installed = TRUE)
+  try(virtualenv_install(path, "pygraphviz", ignore_installed = TRUE))
+  use_virtualenv(path, required = TRUE)
 
-  package <- paste0("git+https://github.com/liesel-devs/liesel.git")
-
-  virtualenv_install(virtualenv, package, ignore_installed = TRUE)
-  try(virtualenv_install(virtualenv, "pygraphviz", ignore_installed = TRUE))
-  use_virtualenv(virtualenv, required = TRUE)
-
-  virtualenv
+  path
 }
 
 

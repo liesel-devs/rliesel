@@ -4,12 +4,10 @@
 \alias{use_tmp_liesel_venv}
 \title{Create and use a temporary Liesel virtual environment}
 \usage{
-use_tmp_liesel_venv(python = NULL, version = NULL)
+use_tmp_liesel_venv(...)
 }
 \arguments{
-\item{python}{The path to a Python interpreter, to be used with the created
-virtual environment. When \code{NULL}, the Python interpreter associated with
-the current session will be used.}
+\item{...}{Passed on to \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_create()}}.}
 }
 \description{
 Create a temporary Python virtual environment, install Liesel in it,
