@@ -1,4 +1,4 @@
-LIESEL_VERSION <- "0.2.3.9000"
+MIN_LIESEL_VER <- "0.2.4"
 
 .lsl <- NULL
 .lsld <- NULL
@@ -100,14 +100,17 @@ use_tmp_liesel_venv <- function(python = NULL, version = NULL) {
 #' @export
 
 check_liesel_version <- function() {
-  module <- import("liesel", convert = FALSE)
-  version <- py_to_r(module["__version__"])
+  liesel <- import("liesel", convert = FALSE)
+  packaging <- import("packaging", convert = FALSE)
+  installed <- packaging$version$parse(liesel["__version__"])
+  required <- packaging$version$parse(MIN_LIESEL_VER)
 
-  if (compareVersion(version, LIESEL_VERSION) < 0) {
-    stop("Installed Liesel version ", version, " is incompatible, ",
-         "need at least version ", LIESEL_VERSION)
+  if (py_to_r(installed < required)) {
+    stop("Installed Liesel version ", liesel["__version__"],
+         " is incompatible, need at least version ", MIN_LIESEL_VER)
   } else {
-    message("Installed Liesel version ", version, " is compatible.")
+    message("Installed Liesel version ", liesel["__version__"],
+            " is compatible, continuing to set up model")
   }
 
   invisible(NULL)
