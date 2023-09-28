@@ -21,3 +21,4 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
+URL: https://liesel-devs.github.io/rliesel/
