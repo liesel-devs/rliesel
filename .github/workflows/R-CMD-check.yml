@@ -21,7 +21,7 @@ jobs:
           python-version: "3.10"
 
       - name: Install venv
-        run: sudo apt-get install python3-venv
+        run: pip install venv
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
