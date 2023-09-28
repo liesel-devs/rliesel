@@ -20,8 +20,8 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install venv
-        run: pip install venv
+      - name: Check for venv
+        run: python -m venv -h
 
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
