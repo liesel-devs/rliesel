@@ -52,6 +52,9 @@ plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
 #' @importFrom reticulate py_has_attr
 
 get_distribution <- function(x) {
+  .lsld$GaussianCopula  # fix #4
+  .tfd$Normal  # fix #4
+
   if (is.character(x)) {
     if (py_has_attr(.lsld, x)) .lsld[[x]] else .tfd[[x]]
   } else {
@@ -63,6 +66,9 @@ get_distribution <- function(x) {
 #' @importFrom reticulate py_has_attr
 
 get_bijector <- function(x) {
+  .lslb$AlgebraicSigmoid  # fix #4
+  .tfb$Identity  # fix #4
+
   if (is.character(x)) {
     if (py_has_attr(.lslb, x)) .lslb[[x]] else .tfb[[x]]
   } else {
