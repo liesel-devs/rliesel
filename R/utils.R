@@ -49,29 +49,31 @@ plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
 }
 
 
-#' @importFrom reticulate py_has_attr
+#' @importFrom reticulate py_get_attr py_has_attr
 
 get_distribution <- function(x) {
-  .lsld$GaussianCopula  # fix #4
-  .tfd$Normal  # fix #4
+  if (is.character(x) & py_has_attr(.lsld, x)) {
+    return(py_get_attr(.lsld, x, silent = FALSE))
+  }
 
   if (is.character(x)) {
-    if (py_has_attr(.lsld, x)) .lsld[[x]] else .tfd[[x]]
-  } else {
-    x
+    return(py_get_attr(.tfd, x, silent = FALSE))
   }
+
+  x
 }
 
 
-#' @importFrom reticulate py_has_attr
+#' @importFrom reticulate py_get_attr py_has_attr
 
 get_bijector <- function(x) {
-  .lslb$AlgebraicSigmoid  # fix #4
-  .tfb$Identity  # fix #4
+  if (is.character(x) & py_has_attr(.lslb, x)) {
+    return(py_get_attr(.lslb, x, silent = FALSE))
+  }
 
   if (is.character(x)) {
-    if (py_has_attr(.lslb, x)) .lslb[[x]] else .tfb[[x]]
-  } else {
-    x
+    return(py_get_attr(.tfb, x, silent = FALSE))
   }
+
+  x
 }
