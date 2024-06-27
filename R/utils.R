@@ -52,7 +52,7 @@ plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
 #' @importFrom reticulate py_get_attr py_has_attr
 
 get_distribution <- function(x) {
-  if (is.character(x) & py_has_attr(.lsld, x)) {
+  if (is.character(x) && py_has_attr(.lsld, x)) {
     return(py_get_attr(.lsld, x, silent = FALSE))
   }
 
@@ -67,7 +67,7 @@ get_distribution <- function(x) {
 #' @importFrom reticulate py_get_attr py_has_attr
 
 get_bijector <- function(x) {
-  if (is.character(x) & py_has_attr(.lslb, x)) {
+  if (is.character(x) && py_has_attr(.lslb, x)) {
     return(py_get_attr(.lslb, x, silent = FALSE))
   }
 
