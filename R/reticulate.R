@@ -77,8 +77,7 @@ use_tmp_liesel_venv <- function(...) {
   path <- tempdir()
 
   virtualenv_create(path, ...)
-  virtualenv_install(path, "git+https://github.com/liesel-devs/liesel.git",
-                     ignore_installed = TRUE)
+  virtualenv_install(path, "liesel", ignore_installed = TRUE)
   try(virtualenv_install(path, "pygraphviz", ignore_installed = TRUE))
   use_virtualenv(path, required = TRUE)
 
