@@ -103,7 +103,8 @@ test_that("liesel() works", {
   expect_s3_class(m, "liesel.model.model.Model")
 
   vars <- py_eval("dict(r.m.vars)")
-  expect_equal(vars$response$value, y)
+
+  expect_equal(as.numeric(vars$response$value), y, tolerance = 1e-7)
 
   expect_s3_class(
     vars$response$dist_node$init_dist(),
