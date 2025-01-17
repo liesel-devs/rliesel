@@ -91,8 +91,10 @@ liesel <- function(response,
                    diagonalize_penalties = TRUE,
                    builder = FALSE) {
   check_liesel_version()
-  mb <- .lsl$DistRegBuilder()
+  response <- substitute(response)
+  response <- eval(response, data, parent.frame())
 
+  mb <- .lsl$DistRegBuilder()
   mb$add_response(np_array(response), get_distribution(distribution))
   fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
   if (builder) mb else mb$build_model()
