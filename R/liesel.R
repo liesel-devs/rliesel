@@ -90,10 +90,36 @@ liesel <- function(response,
                    knots = NULL,
                    diagonalize_penalties = TRUE,
                    builder = FALSE) {
-  check_liesel_version()
-  mb <- .lsl$DistRegBuilder()
+    check_liesel_version()
 
-  mb$add_response(np_array(response), get_distribution(distribution))
-  fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
-  if (builder) mb else mb$build_model()
+    response <- substitute(response)
+
+    response_name <- as.character(response)
+    response_in_env <- exists(response, parent.frame())
+    response_in_df <- response_name %in% names(df)
+
+    response <- eval(response, data, parent.frame())
+
+    if (response_in_env & response_in_df) {
+        message(
+          "Found response '",
+          response_name,
+          "' in parent environment *and* data. Using '",
+          response_name,
+          "' found in data."
+        )
+    } else if (response_in_env) {
+        message(
+          "Did not find response '",
+          response_name,
+          "' in data. Using '",
+          response_name,
+          "' found in parent environment."
+        )
+    }
+
+    mb <- .lsl$DistRegBuilder()
+    mb$add_response(np_array(response), get_distribution(distribution))
+    fill_mb(mb, response, predictors, data, knots, diagonalize_penalties)
+    if (builder) mb else mb$build_model()
 }
