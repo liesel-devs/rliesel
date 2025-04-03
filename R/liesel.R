@@ -96,7 +96,7 @@ liesel <- function(response,
 
     response_name <- as.character(response)
     response_in_env <- exists(response, parent.frame())
-    response_in_df <- response_name %in% names(df)
+    response_in_df <- response_name %in% names(data)
 
     response <- eval(response, data, parent.frame())
 
