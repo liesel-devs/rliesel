@@ -11,6 +11,7 @@ data <- data.frame(x = x, y = y)
 # initialize python. without this line, r crashes on my system
 py_config()
 
+py_require("liesel")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Test mgcv.R ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
