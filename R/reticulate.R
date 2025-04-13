@@ -29,20 +29,23 @@
 #' The functions or variables listed here are no longer part of **rliesel** as
 #' they are no longer needed.
 #'
+#' Starting from version 1.41, [reticulate] can manage Python environments
+#' and dependencies automatically. If reticulate finds no installed version
+#' of Liesel or an incompatible one, it will install a compatible version
+#' automatically. Users who wish to manage their Python environment manually,
+#' please use [reticulate::use_virtualenv()] or [reticulate::use_condaenv()].
+#' See also `vignette("package", "reticulate")`.
+#'
 #' @usage
 #' check_liesel_version()
-#' use_liesel_venv()
+#' use_liesel_venv(...)
+#' @param ... Defunct.
 #' @name rliesel-defunct
+#' @aliases check_liesel_version use_liesel_venv
 
 NULL
 
 
-#' Check if the installed versions of RLiesel and Liesel are compatible
-#'
-#' This function is defunct. If an incompatible version of Liesel is found,
-#' reticulate will install a compatible version automatically.
-#' See `vignette("package", "reticulate")`.
-#'
 #' @export
 
 check_liesel_version <- function() {
@@ -50,17 +53,8 @@ check_liesel_version <- function() {
 }
 
 
-#' Use a Liesel virtual environment
-#'
-#' This function is defunct. Please configure the Liesel virtual or
-#' conda environment manually, e.g. using [reticulate::use_virtualenv()]
-#' or [reticulate::use_condaenv()]. Alternatively, let reticulate manage
-#' the environment automatically. See `vignette("package", "reticulate")`.
-#'
-#' @inheritParams reticulate::use_virtualenv
-#' @inheritParams reticulate::virtualenv_create
 #' @export
 
-use_liesel_venv <- function(virtualenv = NULL, python = NULL, version = NULL) {
+use_liesel_venv <- function(...) {
   .Defunct("reticulate::use_virtualenv", "rliesel")
 }

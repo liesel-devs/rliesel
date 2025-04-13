@@ -2,12 +2,25 @@
 % Please edit documentation in R/reticulate.R
 \name{rliesel-defunct}
 \alias{rliesel-defunct}
+\alias{check_liesel_version}
+\alias{use_liesel_venv}
 \title{Defunct Functions in Package \strong{rliesel}}
 \usage{
 check_liesel_version()
-use_liesel_venv()
+use_liesel_venv(...)
+}
+\arguments{
+\item{...}{Defunct.}
 }
 \description{
 The functions or variables listed here are no longer part of \strong{rliesel} as
 they are no longer needed.
+}
+\details{
+Starting from version 1.41, \link{reticulate} can manage Python environments
+and dependencies automatically. If reticulate finds no installed version
+of Liesel or an incompatible one, it will install a compatible version
+automatically. Users who wish to manage their Python environment manually,
+please use \code{\link[reticulate:use_python]{reticulate::use_virtualenv()}} or \code{\link[reticulate:use_python]{reticulate::use_condaenv()}}.
+See also \code{vignette("package", "reticulate")}.
 }
