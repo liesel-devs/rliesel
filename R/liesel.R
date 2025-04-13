@@ -90,8 +90,6 @@ liesel <- function(response,
                    knots = NULL,
                    diagonalize_penalties = TRUE,
                    builder = FALSE) {
-    check_liesel_version()
-
     response <- substitute(response)
 
     response_name <- as.character(response)

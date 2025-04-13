@@ -16,6 +16,7 @@ Python as installed by the \code{\link[reticulate:install_python]{install_python
 }
 \description{
 This function is defunct. Please configure the Liesel virtual or
-conda environment manually, e.g. using \code{\link[reticulate:use_python]{reticulate::use_virtualenv()}} or
-\code{\link[reticulate:use_python]{reticulate::use_condaenv()}}. See \code{vignette("versions", "reticulate")}.
+conda environment manually, e.g. using \code{\link[reticulate:use_python]{reticulate::use_virtualenv()}}
+or \code{\link[reticulate:use_python]{reticulate::use_condaenv()}}. Alternatively, let reticulate manage
+the environment automatically. See \code{vignette("package", "reticulate")}.
 }

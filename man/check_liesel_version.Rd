@@ -7,7 +7,7 @@
 check_liesel_version()
 }
 \description{
-Note that this function needs to be called after setting the virtual or
-conda environment, e.g. using \code{\link[reticulate:use_python]{reticulate::use_virtualenv()}} or
-\code{\link[reticulate:use_python]{reticulate::use_condaenv()}}.
+This function is defunct. If an incompatible version of Liesel is found,
+reticulate will install a compatible version automatically.
+See \code{vignette("package", "reticulate")}.
 }

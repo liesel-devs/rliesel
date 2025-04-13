@@ -4,6 +4,7 @@
 \alias{rliesel-defunct}
 \title{Defunct Functions in Package \strong{rliesel}}
 \usage{
+check_liesel_version()
 use_liesel_venv()
 }
 \description{
