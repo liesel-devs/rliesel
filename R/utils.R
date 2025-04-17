@@ -45,7 +45,6 @@ load_model <- function(path) {
 #' @export
 
 plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
-  try(py_require("pygraphviz"), silent = TRUE)
   if (!nodes) .lsl$plot_vars(x, ...) else .lsl$plot_nodes(x, ...)
   invisible(NULL)
 }
