@@ -41,7 +41,6 @@ load_model <- function(path) {
 #' @param ... Passed on to the `plot_vars()` or `plot_nodes()` function
 #'            in the `liesel.model.viz` module.
 #'
-#' @importFrom reticulate py_require
 #' @export
 
 plot.liesel.model.model.Model <- function(x, nodes = FALSE, ...) {
