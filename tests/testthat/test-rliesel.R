@@ -6,12 +6,7 @@ n <- 10
 x <- runif(n)
 y <- rnorm(n, mean = x, sd = exp(x))
 data <- data.frame(x = x, y = y)
-# use_tmp_liesel_venv()
 
-# initialize python. without this line, r crashes on my system
-py_config()
-
-py_require("liesel")
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Test mgcv.R ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
