@@ -40,11 +40,30 @@ they are no longer needed.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu"><a href="use_liesel_venv.html">use_liesel_venv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_liesel_version</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">use_liesel_venv</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
-  </main></div>
+
+<dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Defunct.</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Starting from version 1.41, reticulate can manage Python environments
+and dependencies automatically. If reticulate finds no installed version
+of Liesel or an incompatible one, it will install a compatible version
+automatically. Users who wish to manage their Python environment manually,
+please use <code><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">reticulate::use_virtualenv()</a></code> or <code><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">reticulate::use_condaenv()</a></code>.
+See also <code><a href="https://rstudio.github.io/reticulate/articles/package.html" class="external-link">vignette("package", "reticulate")</a></code>.</p>
+    </div>
+
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

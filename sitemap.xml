@@ -4,7 +4,6 @@
 <url><loc>https://liesel-devs.github.io/rliesel/LICENSE.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/authors.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/index.html</loc></url>
-<url><loc>https://liesel-devs.github.io/rliesel/reference/check_liesel_version.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/reference/index.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/reference/liesel.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/reference/load_model.html</loc></url>
@@ -12,7 +11,5 @@
 <url><loc>https://liesel-devs.github.io/rliesel/reference/predictor.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/reference/rliesel-defunct.html</loc></url>
 <url><loc>https://liesel-devs.github.io/rliesel/reference/save_model.html</loc></url>
-<url><loc>https://liesel-devs.github.io/rliesel/reference/use_liesel_venv.html</loc></url>
-<url><loc>https://liesel-devs.github.io/rliesel/reference/use_tmp_liesel_venv.html</loc></url>
 </urlset>
 
