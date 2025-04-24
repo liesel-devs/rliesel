@@ -100,30 +100,22 @@ liesel <- function(response,
   }
 
   response_in_env <- is.symbol(response_expr) && exists(response_name, envir = parent.frame())
-
-
   response_in_df <- response_name %in% names(data)
-
   response <- eval(response_expr, data, parent.frame())
 
   if (response_in_env & response_in_df) {
     message(
-      "Found response '",
+      "Response '",
       response_name,
-      "' in parent environment *and* data. Using '",
-      response_name,
-      "' found in data."
+      "' found in data and environment, using data."
     )
   } else if (response_in_env) {
     message(
-      "Did not find response '",
+      "Response '",
       response_name,
-      "' in data. Using '",
-      response_name,
-      "' found in parent environment."
+      "' found in environment, but not data, using environment."
     )
   }
-
 
   mb <- .lsl$DistRegBuilder()
   mb$add_response(np_array(response), get_distribution(distribution))
