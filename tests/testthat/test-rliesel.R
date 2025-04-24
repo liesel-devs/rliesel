@@ -135,3 +135,76 @@ test_that("liesel() works", {
 
   expect_setequal(names(vars), expected_var_names)
 })
+
+test_that("taking response from data works", {
+  df <- data.frame(y = 1:5, x = 1:5)
+  model <- liesel(
+    response = y,
+    predictors = list(
+      loc = predictor(~ x),
+      scale = predictor(~ x, inverse_link = "Exp")
+    ),
+    data = df
+  )
+
+  expect_equal(as.numeric(model$vars["response"]$value), df$y)
+  expect_equal(as.numeric(model$vars["loc_p0_X"]$value[,1]), df$x)
+
+})
+
+
+test_that("taking response from environment works", {
+  df <- data.frame(x = 1:5)
+
+  y <-  1:5
+
+  model <- liesel(
+    response = y,
+    predictors = list(
+      loc = predictor(~ x),
+      scale = predictor(~ x, inverse_link = "Exp")
+    ),
+    data = df
+  )
+
+  expect_equal(as.numeric(model$vars["response"]$value), y)
+  expect_equal(as.numeric(model$vars["loc_p0_X"]$value[,1]), df$x)
+
+})
+
+
+test_that("If response is in environment and data, prefer data", {
+  df <- data.frame(y = 5:1, x = 1:5)
+
+  y <-  1:5
+
+  model <- liesel(
+    response = y,
+    predictors = list(
+      loc = predictor(~ x),
+      scale = predictor(~ x, inverse_link = "Exp")
+    ),
+    data = df
+  )
+
+  expect_equal(as.numeric(model$vars["response"]$value), df$y)
+  expect_equal(as.numeric(model$vars["loc_p0_X"]$value[,1]), df$x)
+
+})
+
+test_that("Explicitly passing df$y works", {
+  df <- data.frame(y = 5:1, x = 1:5)
+
+  model <- liesel(
+    response = df$y,
+    predictors = list(
+      loc = predictor(~ x),
+      scale = predictor(~ x, inverse_link = "Exp")
+    ),
+    data = df
+  )
+
+  expect_equal(as.numeric(model$vars["response"]$value), df$y)
+  expect_equal(as.numeric(model$vars["loc_p0_X"]$value[,1]), df$x)
+
+})
