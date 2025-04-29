@@ -208,3 +208,38 @@ test_that("Explicitly passing df$y works", {
   expect_equal(as.numeric(model$vars["loc_p0_X"]$value[,1]), df$x)
 
 })
+
+
+test_that("taking covariates directly from data does not work", {
+  df <- data.frame(x = 1:5)
+
+  y <-  1:5
+
+  expect_error({
+    model <- liesel(
+      response = y,
+      predictors = list(
+        loc = predictor(~ df$x),
+        scale = predictor(~ df$x, inverse_link = "Exp")
+      )
+    )
+  })
+})
+
+
+test_that("taking covariates from environment does not work", {
+  df <- data.frame(x = 1:5)
+  x <- df$x
+
+  y <-  1:5
+
+  expect_error({
+    model <- liesel(
+      response = y,
+      predictors = list(
+        loc = predictor(~ x),
+        scale = predictor(~ x, inverse_link = "Exp")
+      )
+    )
+  })
+})
