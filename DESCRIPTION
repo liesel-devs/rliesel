@@ -1,6 +1,6 @@
 Package: rliesel
 Title: R Interface for the Liesel Probabilistic Programming Framework
-Version: 0.0.3
+Version: 0.0.4
 Authors@R:
     c(person(given = "Hannes",
              family = "Riebl",
