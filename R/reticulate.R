@@ -8,7 +8,7 @@
 #' @importFrom reticulate import py_require
 
 .onLoad <- function(libname, pkgname) {
-  py_require("liesel>=0.3")
+  py_require("liesel>=0.4")
 
   .lsl <<- import("liesel.model", convert = FALSE, delay_load = TRUE)
   .lsld <<- import("liesel.distributions", convert = FALSE, delay_load = TRUE)
