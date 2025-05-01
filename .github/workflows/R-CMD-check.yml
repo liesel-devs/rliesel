@@ -41,5 +41,9 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Point reticulate to GitHub Actions Python
+        run: |
+          echo "RETICULATE_PYTHON=${{ env.pythonLocation }}/bin/python" >> $GITHUB_ENV
+
       - name: Check R package
         uses: r-lib/actions/check-r-package@v2
