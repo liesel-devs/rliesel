@@ -1,9 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# RLiesel (deprecated, replaced by Liesel-GAM)
+
+**Deprecated:** RLiesel is deprecated. Please use
+[liesel-devs/liesel_gam](https://github.com/liesel-devs/liesel_gam) as
+the replacement.
+
 # RLiesel
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of RLiesel is to provide an R interface for the probabilistic

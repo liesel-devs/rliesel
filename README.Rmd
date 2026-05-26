@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+# RLiesel (deprecated, replaced by Liesel-GAM)
+**Deprecated:** RLiesel is deprecated. Please use [liesel-devs/liesel_gam](https://github.com/liesel-devs/liesel_gam) as the replacement.
+
 # RLiesel
 
 <!-- badges: start -->
