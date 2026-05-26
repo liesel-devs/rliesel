@@ -24,6 +24,16 @@
 }
 
 
+.onAttach <- function(libname, pkgname) {
+  warning(
+    "Package 'rliesel' is deprecated. Please use liesel-GAM instead: ",
+    "https://github.com/liesel-devs/liesel_gam",
+    call. = FALSE,
+    immediate. = TRUE
+  )
+}
+
+
 #' Defunct Functions in Package **rliesel**
 #'
 #' The functions or variables listed here are no longer part of **rliesel** as
